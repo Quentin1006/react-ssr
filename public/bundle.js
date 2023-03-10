@@ -41411,17 +41411,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _app_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-context */ "./src/app/app-context.tsx");
 /* harmony import */ var _Comp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Comp */ "./src/app/Comp.tsx");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../routes */ "./src/routes.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Page */ "./src/app/pages/Page.tsx");
 
 
 
 
 
-const App = ({ initialProps = {} }) => {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_app_context__WEBPACK_IMPORTED_MODULE_1__.AppProvider, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Comp__WEBPACK_IMPORTED_MODULE_2__.A, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, { children: _routes__WEBPACK_IMPORTED_MODULE_3__["default"].map(({ path, getStaticProps, component: Page }) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, { path: path, element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Page, { getStaticProps: getStaticProps, ...initialProps }) }, path))) })] }));
+
+
+const App = ({ globalInitialProps }) => {
+    const [globalAppProps, setGlobalAppProps] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(globalInitialProps);
+    const updateAppProps = (routeName) => (newProps) => {
+        setGlobalAppProps({
+            ...(globalAppProps || {}),
+            [routeName]: newProps,
+        });
+    };
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_app_context__WEBPACK_IMPORTED_MODULE_1__.AppProvider, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Comp__WEBPACK_IMPORTED_MODULE_2__.A, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, { children: _routes__WEBPACK_IMPORTED_MODULE_3__["default"].map(({ name, path, getStaticProps, Component }) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, { path: path, element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_pages_Page__WEBPACK_IMPORTED_MODULE_5__.Page, { getStaticProps: getStaticProps, props: globalAppProps === null || globalAppProps === void 0 ? void 0 : globalAppProps[name], updateAppProps: updateAppProps(name), Component: Component, name: name, path: path }) }, path))) })] }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -41448,7 +41460,6 @@ __webpack_require__.r(__webpack_exports__);
 const A = ({}) => {
     const { name, number, setNumber } = (0,_app_context__WEBPACK_IMPORTED_MODULE_2__.useAppContext)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        console.log("useEffect triggered");
         setNumber(4);
     }, [number, setNumber]);
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "A", children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "A-inner", children: ["Hello my name is ", name] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "A-inner", children: ["My num is ", number] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("hr", {})] }));
@@ -41493,21 +41504,16 @@ const AppProvider = ({ children }) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Component": () => (/* binding */ Component),
-/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps)
+/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps),
+/* harmony export */   "name": () => (/* binding */ name)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 
 
-
-const Component = ({ name, magicNb, getStaticProps }) => {
-    console.log({ name, magicNb });
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        getStaticProps();
-    }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "This is About" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [" ", "The code name is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: name }), " and the the magic number is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: magicNb })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, { to: "/", children: "Go to Home page" })] }));
+const Component = (props) => {
+    console.log("rerendering About", { props });
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "This is About" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [" ", "The code name is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: props.name }), " and the the magic number is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: props.magicNb })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, { to: "/", children: "Go to Home page" })] }));
 };
 // @FIXME: no any
 const getStaticProps = async () => {
@@ -41515,6 +41521,7 @@ const getStaticProps = async () => {
         setTimeout(() => resolve({ name: "aboutpage", magicNb: 108 }), 1500);
     });
 };
+const name = "About";
 
 
 /***/ }),
@@ -41528,20 +41535,63 @@ const getStaticProps = async () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Component": () => (/* binding */ Component),
-/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps)
+/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps),
+/* harmony export */   "name": () => (/* binding */ name)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 
 
-const Component = ({ name, magicNb, getStaticProps }) => {
-    console.log({ name, magicNb });
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "This is Home" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [" ", "The code name is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: name }), " and the the magic number is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: magicNb })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, { to: "/about", children: "Go to About page" })] }));
+const Component = (props) => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "This is Home" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [" ", "The code name is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: props === null || props === void 0 ? void 0 : props.name }), " and the the magic number is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", { children: props === null || props === void 0 ? void 0 : props.magicNb })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, { to: "/about", children: "Go to About page" })] }));
 };
 const getStaticProps = async () => {
     return new Promise((resolve) => {
         setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000);
     });
+};
+const name = "Home";
+
+
+/***/ }),
+
+/***/ "./src/app/pages/Page.tsx":
+/*!********************************!*\
+  !*** ./src/app/pages/Page.tsx ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Page": () => (/* binding */ Page)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const logger = (name, path) => (message) => {
+    console.log(name, ":", path, "=>", message);
+};
+const Page = ({ name, path, props, getStaticProps, updateAppProps, Component, }) => {
+    const log = logger(name, path);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+        const fetchPageProps = async () => {
+            if (!props) {
+                log("fetching next props");
+                const nextProps = await getStaticProps();
+                updateAppProps(nextProps);
+            }
+            else {
+                log("already have props, not doing anything");
+            }
+        };
+        fetchPageProps();
+    }, [props, getStaticProps]);
+    if (!props) {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "Loading..." });
+    }
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, { ...props });
 };
 
 
@@ -41563,13 +41613,15 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
+        name: _app_pages_Home__WEBPACK_IMPORTED_MODULE_0__.name,
         path: "/",
-        component: _app_pages_Home__WEBPACK_IMPORTED_MODULE_0__.Component,
+        Component: _app_pages_Home__WEBPACK_IMPORTED_MODULE_0__.Component,
         getStaticProps: _app_pages_Home__WEBPACK_IMPORTED_MODULE_0__.getStaticProps,
     },
     {
+        name: _app_pages_About__WEBPACK_IMPORTED_MODULE_1__.name,
         path: "/about",
-        component: _app_pages_About__WEBPACK_IMPORTED_MODULE_1__.Component,
+        Component: _app_pages_About__WEBPACK_IMPORTED_MODULE_1__.Component,
         getStaticProps: _app_pages_About__WEBPACK_IMPORTED_MODULE_1__.getStaticProps,
     },
 ];
@@ -41674,10 +41726,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Root = () => {
-    var _a;
-    const initialProps = (_a = globalThis.__INITIAL_DATA__) !== null && _a !== void 0 ? _a : {};
-    delete globalThis.__INITIAL_DATA__;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_app_App__WEBPACK_IMPORTED_MODULE_2__["default"], { initialProps: initialProps }) }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_app_App__WEBPACK_IMPORTED_MODULE_2__["default"], { globalInitialProps: globalThis.__INITIAL_DATA__ }) }));
 };
 (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot)(document.getElementById("root"), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Root, {}));
 

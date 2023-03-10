@@ -1,19 +1,19 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { PageProps } from "../../typings"
 
 type HomeProps = {
   name?: string
   magicNb?: number
-  getStaticProps: () => Promise<any>
 }
 
-export const Component = ({ name, magicNb, getStaticProps }: HomeProps) => {
-  console.log({ name, magicNb })
+export const Component = (props: HomeProps) => {
   return (
     <>
       <div>This is Home</div>
       <div>
         {" "}
-        The code name is <b>{name}</b> and the the magic number is <b>{magicNb}</b>
+        The code name is <b>{props?.name}</b> and the the magic number is <b>{props?.magicNb}</b>
       </div>
       <Link to="/about">Go to About page</Link>
     </>
@@ -25,3 +25,5 @@ export const getStaticProps = async (): Promise<any> => {
     setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
   })
 }
+
+export const name = "Home"

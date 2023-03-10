@@ -3,13 +3,15 @@ import * as AboutPage from "./app/pages/About"
 
 const routes = [
   {
+    name: HomePage.name,
     path: "/",
-    component: HomePage.Component,
+    Component: HomePage.Component,
     getStaticProps: HomePage.getStaticProps,
   },
   {
+    name: AboutPage.name,
     path: "/about",
-    component: AboutPage.Component,
+    Component: AboutPage.Component,
     getStaticProps: AboutPage.getStaticProps,
   },
 ]

@@ -4,21 +4,39 @@ import { AppProvider } from "./app-context"
 import { A } from "./Comp"
 
 import routes from "../routes"
+import { useState } from "react"
+import { Page } from "./pages/Page"
 
 type AppProps = {
-  initialProps?: Record<string, any>
+  globalInitialProps?: Record<string, any>
 }
 
-const App = ({ initialProps = {} }: AppProps) => {
+const App = ({ globalInitialProps }: AppProps) => {
+  const [globalAppProps, setGlobalAppProps] = useState(globalInitialProps)
+  const updateAppProps = (routeName: string) => (newProps) => {
+    setGlobalAppProps({
+      ...(globalAppProps || {}),
+      [routeName]: newProps,
+    })
+  }
   return (
     <AppProvider>
       <A />
       <Routes>
-        {routes.map(({ path, getStaticProps, component: Page }) => (
+        {routes.map(({ name, path, getStaticProps, Component }) => (
           <Route
             key={path}
             path={path}
-            element={<Page getStaticProps={getStaticProps} {...initialProps} />}
+            element={
+              <Page
+                getStaticProps={getStaticProps}
+                props={globalAppProps?.[name]}
+                updateAppProps={updateAppProps(name)}
+                Component={Component}
+                name={name}
+                path={path}
+              />
+            }
           />
         ))}
       </Routes>

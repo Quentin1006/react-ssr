@@ -3,11 +3,9 @@ import { BrowserRouter } from "react-router-dom"
 import App from "./app/App"
 
 const Root = () => {
-  const initialProps = globalThis.__INITIAL_DATA__ ?? {}
-  delete globalThis.__INITIAL_DATA__
   return (
     <BrowserRouter>
-      <App initialProps={initialProps} />
+      <App globalInitialProps={globalThis.__INITIAL_DATA__} />
     </BrowserRouter>
   )
 }
