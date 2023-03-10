@@ -12,11 +12,3 @@ const Root = () => {
 }
 
 hydrateRoot(document.getElementById("root")!, <Root />)
-
-// const root = createRoot(document.querySelector("#root")!)
-
-// root.render(
-//   <BrowserRouter>
-//     <App />
-//   </BrowserRouter>
-// )

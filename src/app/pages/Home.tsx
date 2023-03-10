@@ -6,7 +6,7 @@ type HomeProps = {
 }
 
 export const Component = (props: HomeProps) => {
-  console.log("rerendering About", { props })
+  console.log("(re)rendering Home", { props })
   return (
     <>
       <div>This is Home</div>
