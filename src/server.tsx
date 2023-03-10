@@ -5,7 +5,7 @@ import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
 import serialize from "serialize-javascript"
 
-import App from "./app/App"
+import _App from "./lib/_App"
 import routes from "./routes"
 
 const app = express()
@@ -20,12 +20,12 @@ app.get("*", async (req, res) => {
   let initialProps: any = {}
   if (activeRoute?.getStaticProps) {
     initialProps = {
-      [activeRoute.name]: await activeRoute.getStaticProps(),
+      [activeRoute.name]: await activeRoute.getStaticProps(req.url),
     }
   }
   const html = renderToString(
     <StaticRouter location={req.url}>
-      <App globalInitialProps={initialProps} />
+      <_App routes={routes} globalInitialProps={initialProps} />
     </StaticRouter>
   )
   console.log({ html })

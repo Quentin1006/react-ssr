@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { PageProps } from "../../typings"
 
 type HomeProps = {
   name?: string
@@ -8,6 +6,7 @@ type HomeProps = {
 }
 
 export const Component = (props: HomeProps) => {
+  console.log("rerendering About", { props })
   return (
     <>
       <div>This is Home</div>
@@ -20,7 +19,7 @@ export const Component = (props: HomeProps) => {
   )
 }
 
-export const getStaticProps = async (): Promise<any> => {
+export const getStaticProps = async (path: string): Promise<any> => {
   return new Promise((resolve) => {
     setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
   })

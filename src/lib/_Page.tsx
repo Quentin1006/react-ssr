@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import { PageProps } from "../../typings"
+import { PageProps } from "./typings"
 
 const logger = (name: string, path: string) => (message: string) => {
   console.log(name, ":", path, "=>", message)
 }
 
-export const Page = ({
+export const _Page = ({
   name,
   path,
   props,
@@ -18,7 +18,7 @@ export const Page = ({
     const fetchPageProps = async () => {
       if (!props) {
         log("fetching next props")
-        const nextProps = await getStaticProps()
+        const nextProps = await getStaticProps(path)
         updateAppProps(nextProps)
       } else {
         log("already have props, not doing anything")

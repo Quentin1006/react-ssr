@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-
-import { PageProps } from "../../typings"
 
 type AboutProps = {
   name: string
@@ -22,8 +19,8 @@ export const Component = (props: AboutProps) => {
   )
 }
 
-// @FIXME: no any
-export const getStaticProps = async (): Promise<any> => {
+// FIXME: no any
+export const getStaticProps = async (path: string): Promise<any> => {
   return new Promise((resolve) => {
     setTimeout(() => resolve({ name: "aboutpage", magicNb: 108 }), 1500)
   })
