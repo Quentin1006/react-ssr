@@ -38,8 +38,13 @@ app.get("*", async (req, res) => {
 <body>
     <!-- It has to be on one line or it will trigger hydration error-->
     <div id="root">${html}</div>
-    <script>window.__INITIAL_DATA__ = ${serialize(initialProps)}</script>
-    <script src="/bundle.js"></script>
+    <script>
+      import("/bundle.js").then(App => {
+       App.default(${serialize(initialProps)})
+      })
+    </script>
+    
+    
 </body>
 </html>`.replace("\n", "")
   )

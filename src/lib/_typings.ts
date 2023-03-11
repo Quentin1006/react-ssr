@@ -5,7 +5,7 @@ export type _PageProps<T = any> = _RouteConfig & {
   updateAppProps: (newProps: any) => any
 }
 
-type _RouteConfig = {
+export type _RouteConfig = {
   name: string
   path: string
   Component: FC<any>

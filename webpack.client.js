@@ -10,6 +10,9 @@ const config = {
   mode: "development",
   devtool: "source-map",
   entry: "./src/client.tsx",
+  experiments: {
+    outputModule: true,
+  },
   target: "web",
   plugins: [
     new CopyPlugin({
@@ -19,6 +22,7 @@ const config = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
+    libraryTarget: "module",
   },
 }
 
