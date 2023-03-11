@@ -27,5 +27,3 @@ export const getStaticProps = async (path: string): Promise<any> => {
 }
 
 export const name = "About"
-
-// export default Component
