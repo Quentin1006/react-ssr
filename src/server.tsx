@@ -1,5 +1,4 @@
 import express from "express"
-import * as React from "react"
 import { renderToString } from "react-dom/server"
 import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
@@ -7,6 +6,7 @@ import serialize from "serialize-javascript"
 
 import _App from "./lib/_App"
 import routes from "./routes"
+import { Layout } from "./app/Layout"
 
 const app = express()
 const port = 3000
@@ -25,7 +25,7 @@ app.get("*", async (req, res) => {
   }
   const html = renderToString(
     <StaticRouter location={req.url}>
-      <_App routes={routes} globalInitialProps={initialProps} />
+      <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
     </StaticRouter>
   )
   console.log({ html })

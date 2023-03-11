@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { PageProps } from "./_typings"
+import { _PageProps } from "./_typings"
 
 const logger = (name: string, path: string) => (message: string) => {
   console.log(name, ":", path, "=>", message)
@@ -12,7 +12,7 @@ export const _Page = ({
   getStaticProps,
   updateAppProps,
   Component,
-}: PageProps) => {
+}: _PageProps) => {
   const log = logger(name, path)
   useEffect(() => {
     const fetchPageProps = async () => {
