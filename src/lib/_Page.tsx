@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { PageProps } from "./typings"
+import { PageProps } from "./_typings"
 
 const logger = (name: string, path: string) => (message: string) => {
   console.log(name, ":", path, "=>", message)

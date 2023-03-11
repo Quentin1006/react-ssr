@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { useState } from "react"
 import { _Page } from "./_Page"
-import type { RoutesConfig } from "./typings"
+import type { RoutesConfig } from "./_typings"
 
 type _AppProps = {
   globalInitialProps?: Record<string, any>
