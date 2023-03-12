@@ -5,8 +5,6 @@ const baseConfig = require("./webpack.base.js")
 
 /** @type { import('webpack').Configuration } */
 const config = {
-  // Tell webpack the root file of our
-  // server application
   mode: "development",
   devtool: "source-map",
   entry: "./src/client.tsx",

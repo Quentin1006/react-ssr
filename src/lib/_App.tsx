@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import { useState } from "react"
+import { lazy, Suspense, useState } from "react"
 import { _Page } from "./_Page"
 
 import _DefaultLayout from "./_DefaultLayout"

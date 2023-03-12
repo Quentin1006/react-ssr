@@ -8,7 +8,7 @@ export type _PageProps<T = any> = _RouteConfig & {
 export type _RouteConfig = {
   name: string
   path: string
-  Component: FC<any>
+  Component: any // FC<any>
   getStaticProps: (path: string) => Promise<any>
 }
 
