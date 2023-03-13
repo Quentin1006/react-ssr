@@ -14,12 +14,12 @@ const config = {
   target: "web",
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: "assets", to: "." }],
+      patterns: [{ from: "assets", to: "./" }],
     }),
   ],
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist/client"),
     libraryTarget: "module",
   },
 }
