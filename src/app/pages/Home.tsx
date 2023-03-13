@@ -5,7 +5,7 @@ type HomeProps = {
   magicNb?: number
 }
 
-export const Component = (props: HomeProps) => {
+const Home = (props: HomeProps) => {
   console.log("(re)rendering Home", { props })
   return (
     <>
@@ -19,10 +19,4 @@ export const Component = (props: HomeProps) => {
   )
 }
 
-export const getStaticProps = async (path: string): Promise<any> => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
-  })
-}
-
-export const name = "Home"
+export default Home

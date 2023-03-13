@@ -5,11 +5,12 @@ const baseConfig = require("./webpack.base.js")
 
 /** @type { import('webpack').Configuration } */
 const config = {
-  // Tell webpack the root file of our
-  // server application
   mode: "development",
   devtool: "source-map",
   entry: "./src/client.tsx",
+  experiments: {
+    outputModule: true,
+  },
   target: "web",
   plugins: [
     new CopyPlugin({
@@ -19,6 +20,7 @@ const config = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
+    libraryTarget: "module",
   },
 }
 

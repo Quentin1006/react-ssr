@@ -5,7 +5,7 @@ type AboutProps = {
   magicNb: number
 }
 
-export const Component = (props: AboutProps) => {
+const About = (props: AboutProps) => {
   console.log("(re)rendering About", { props })
   return (
     <>
@@ -19,11 +19,4 @@ export const Component = (props: AboutProps) => {
   )
 }
 
-// FIXME: no any
-export const getStaticProps = async (path: string): Promise<any> => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ name: "aboutpage", magicNb: 108 }), 1500)
-  })
-}
-
-export const name = "About"
+export default About
