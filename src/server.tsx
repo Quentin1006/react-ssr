@@ -4,9 +4,15 @@ import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
 import serialize from "serialize-javascript"
 
-import _App from "./lib/_App"
+import { _App, _Document } from "./lib"
 import routes from "./routes"
 import { Layout } from "./app/Layout"
+
+declare global {
+  interface Window {
+    __INITIAL_DATA__: any
+  }
+}
 
 const app = express()
 const port = 3000
@@ -23,26 +29,18 @@ app.get("*", async (req, res) => {
       [activeRoute.name]: await activeRoute.getStaticProps(req.url),
     }
   }
+
+  console.log({ serialized: serialize(initialProps) })
   const html = renderToString(
-    <StaticRouter location={req.url}>
-      <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
-    </StaticRouter>
+    <_Document initialProps={serialize(initialProps)}>
+      <StaticRouter location={req.url}>
+        <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
+      </StaticRouter>
+    </_Document>
   )
+
   console.log({ html })
-  res.send(
-    `
-<html>
-<head>
-<title>SSR with React Router</title>
-</head>
-<body>
-    <!-- It has to be on one line or it will trigger hydration error-->
-    <div id="root">${html}</div>
-    <script>window.__INITIAL_DATA__ = ${serialize(initialProps)}</script>
-    <script src="/bundle.js"></script>
-</body>
-</html>`.replace("\n", "")
-  )
+  res.send(html)
 })
 
 app.listen(port, () => {
