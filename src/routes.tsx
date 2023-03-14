@@ -1,18 +1,25 @@
-import * as HomePage from "./app/pages/Home"
-import * as AboutPage from "./app/pages/About"
+import { lazy } from "react"
 
 const routes = [
   {
-    name: HomePage.name,
+    name: "Home",
     path: "/",
-    Component: HomePage.Component,
-    getStaticProps: HomePage.getStaticProps,
+    Component: lazy(() => import("./app/pages/Home")),
+    getStaticProps: async (path: string): Promise<any> => {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
+      })
+    },
   },
   {
-    name: AboutPage.name,
+    name: "About",
     path: "/about",
-    Component: AboutPage.Component,
-    getStaticProps: AboutPage.getStaticProps,
+    Component: lazy(() => import("./app/pages/About")),
+    getStaticProps: async (path: string): Promise<any> => {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve({ name: "aboutpage", magicNb: 108 }), 1500)
+      })
+    },
   },
 ]
 
