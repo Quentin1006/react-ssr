@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { Suspense, useEffect } from "react"
 import { _PageProps } from "./_typings"
 
 const logger = (name: string, path: string) => (message: string) => {
@@ -32,5 +32,9 @@ export const _Page = ({
     return <div>Loading...</div>
   }
 
-  return <Component {...props} />
+  return (
+    <Suspense fallback={<div>fallback...</div>}>
+      <Component {...props} />
+    </Suspense>
+  )
 }
