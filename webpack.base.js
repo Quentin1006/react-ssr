@@ -1,3 +1,5 @@
+const LoadablePlugin = require("@loadable/webpack-plugin")
+
 /** @type { import('webpack').Configuration } */
 module.exports = {
   resolve: {
@@ -9,9 +11,10 @@ module.exports = {
       {
         // Match js, jsx, ts & tsx files
         test: /\.[jt]sx?$/,
-        loader: "ts-loader",
+        loader: "babel-loader",
         exclude: /node_modules/,
       },
     ],
   },
+  plugins: [new LoadablePlugin()],
 }

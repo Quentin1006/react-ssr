@@ -1,0 +1,8 @@
+{
+  "presets": [
+    ["@babel/react", { "runtime": "automatic" }], 
+    "@babel/typescript", 
+    ["@babel/env", { "modules": false }]
+  ],
+  "plugins": ["@loadable/babel-plugin"]
+}
