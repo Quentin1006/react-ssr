@@ -1,4 +1,6 @@
+import { Suspense } from "react"
 import { Link } from "react-router-dom"
+import Hero from "./Hero"
 
 type HomeProps = {
   name?: string
@@ -9,6 +11,9 @@ export default (props: HomeProps) => {
   console.log("(re)rendering Home", { props })
   return (
     <>
+      <Suspense fallback="Waiting for fetch to resolve within suspense...">
+        <Hero />
+      </Suspense>
       <div>This is Home</div>
       <div>
         {" "}

@@ -29,11 +29,11 @@ export const _Page = ({
   }, [props, getStaticProps])
 
   if (!props) {
-    return <div>Loading...</div>
+    return <div>Waiting for props to be fetched...</div>
   }
 
   return (
-    <Suspense fallback={<div>fallback...</div>}>
+    <Suspense fallback={<div>Waiting for dynamic import within suspense to resolve...</div>}>
       <Component {...props} />
     </Suspense>
   )

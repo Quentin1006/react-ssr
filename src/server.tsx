@@ -1,6 +1,6 @@
 import express from "express"
 import serialize from "serialize-javascript"
-import { renderToString, renderToPipeableStream } from "react-dom/server"
+import { renderToPipeableStream } from "react-dom/server"
 import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
 
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   if (req.url.endsWith(".js")) {
     // Artificially delay serving JS
     // to demonstrate streaming HTML.
-    setTimeout(next, 1000)
+    setTimeout(next, 5000)
   } else {
     next()
   }

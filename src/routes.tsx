@@ -4,7 +4,7 @@ const routes = [
   {
     name: "Home",
     path: "/",
-    Component: lazy(() => import("./app/pages/Home")),
+    Component: lazy(() => import("./app/pages/Home/page")),
     getStaticProps: async (path: string): Promise<any> => {
       return new Promise((resolve) => {
         setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
