@@ -1,4 +1,5 @@
 import { lazy } from "react"
+import fetch from "isomorphic-fetch"
 
 const routes = [
   {
@@ -6,9 +7,9 @@ const routes = [
     path: "/",
     Component: lazy(() => import("./app/pages/Home/page")),
     getStaticProps: async (path: string): Promise<any> => {
-      return new Promise((resolve) => {
-        setTimeout(() => resolve({ name: "homepage", magicNb: 6 }), 1000)
-      })
+      const result = await fetch("http://localhost:8088/home")
+      const data = await result.json()
+      return data
     },
   },
   {
@@ -16,9 +17,9 @@ const routes = [
     path: "/about",
     Component: lazy(() => import("./app/pages/About")),
     getStaticProps: async (path: string): Promise<any> => {
-      return new Promise((resolve) => {
-        setTimeout(() => resolve({ name: "aboutpage", magicNb: 108 }), 1500)
-      })
+      const result = await fetch("http://localhost:8088/about")
+      const data = await result.json()
+      return data
     },
   },
 ]
