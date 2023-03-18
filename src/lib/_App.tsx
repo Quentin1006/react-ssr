@@ -13,6 +13,7 @@ const _App = ({ routes, globalInitialProps, Layout = _DefaultLayout }: _AppProps
       [routeName]: newProps,
     })
   }
+  console.log("(re)rendering App :", { globalAppProps })
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

@@ -16,10 +16,4 @@ const Root = () => {
   )
 }
 
-const Root2 = () => {
-  return <html><body>hello</body></html>
-  
-}
-
-// hydrateRoot(document.getElementById("root")!, <Root />)
-hydrateRoot(document, <App/>)
+hydrateRoot(document, <Root />)

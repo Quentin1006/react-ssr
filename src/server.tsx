@@ -13,6 +13,16 @@ import { Layout } from "./app/Layout"
 const app = express()
 const port = 3000
 
+app.use((req, res, next) => {
+  if (req.url.endsWith(".js")) {
+    // Artificially delay serving JS
+    // to demonstrate streaming HTML.
+    setTimeout(next, 1000)
+  } else {
+    next()
+  }
+})
+
 app.use(express.static("public"))
 
 app.get("*", async (req, res) => {
@@ -24,20 +34,22 @@ app.get("*", async (req, res) => {
       [activeRoute.name]: await activeRoute.getStaticProps(req.url),
     }
   }
-  const { pipe, abort } = renderToPipeableStream(
-    // <Document>
-    //   <StaticRouter  location={req.url}>
-    //     <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
-    //   </StaticRouter>
-    // </Document>,
-    <App/>,
+
+  console.log({ initialProps })
+  const stream = renderToPipeableStream(
+    <Document>
+      <StaticRouter location={req.url}>
+        <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
+      </StaticRouter>
+    </Document>,
     {
       bootstrapScripts: ["/bundle.js"],
-      // bootstrapScriptContent: `window.__INITIAL_DATA__ = ${serialize(initialProps)}`,
-      onAllReady() {
-        res.setHeader("content-type", "text/html")
+      bootstrapScriptContent: `window.__INITIAL_DATA__ = ${serialize(initialProps)}`,
+      onShellReady() {
+        res.setHeader("Content-Type", "text/html")
+        res.statusCode = 200
         console.log("shell ready")
-        pipe(res)
+        stream.pipe(res)
       },
       onError(x) {
         console.error(x)
