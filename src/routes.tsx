@@ -1,6 +1,8 @@
 import { lazy } from "react"
 import fetch from "isomorphic-fetch"
 
+// @FIXME: Will be hard to have access to config
+// if not in hook or react component
 const routes = [
   {
     name: "Home",
