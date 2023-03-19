@@ -29,9 +29,9 @@ app.get("*", async (req, res) => {
   console.log({ url: req.url })
   const activeRoute = routes.find((route) => matchPath(route.path, req.url))
   let initialProps: any = {}
-  if (activeRoute?.getStaticProps) {
+  if (activeRoute?.getServerSideProps) {
     initialProps = {
-      [activeRoute.name]: await activeRoute.getStaticProps(req.url),
+      [activeRoute.name]: await activeRoute.getServerSideProps(req.url),
     }
   }
 

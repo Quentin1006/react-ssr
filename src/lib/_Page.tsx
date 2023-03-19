@@ -9,7 +9,7 @@ export const _Page = ({
   name,
   path,
   props,
-  getStaticProps,
+  getServerSideProps,
   updateAppProps,
   Component,
 }: _PageProps) => {
@@ -18,7 +18,7 @@ export const _Page = ({
     const fetchPageProps = async () => {
       if (!props) {
         log("fetching next props")
-        const nextProps = await getStaticProps(path)
+        const nextProps = await getServerSideProps(path)
         updateAppProps(nextProps)
       } else {
         log("already have props, not doing anything")
@@ -26,7 +26,7 @@ export const _Page = ({
     }
 
     fetchPageProps()
-  }, [props, getStaticProps])
+  }, [props, getServerSideProps])
 
   if (!props) {
     return <div>Waiting for props to be fetched...</div>
