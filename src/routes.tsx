@@ -1,19 +1,29 @@
-import * as HomePage from "./app/pages/Home"
-import * as AboutPage from "./app/pages/About"
+import fetch from "isomorphic-fetch"
 
-const routes = [
-  {
-    name: HomePage.name,
-    path: "/",
-    Component: HomePage.Component,
-    getStaticProps: HomePage.getStaticProps,
-  },
-  {
-    name: AboutPage.name,
-    path: "/about",
-    Component: AboutPage.Component,
-    getStaticProps: AboutPage.getStaticProps,
-  },
-]
+import HomePage from "./app/pages/Home/Home.page"
+import AboutPage from "./app/pages/About"
 
-export default routes
+export const useRoutes = ({ config }: any) => {
+  return [
+    {
+      name: "Home",
+      path: "/",
+      Component: HomePage,
+      getServerSideProps: async (path: string): Promise<any> => {
+        const result = await fetch(`${config.apiDomain}/home`)
+        const data = await result.json()
+        return data
+      },
+    },
+    {
+      name: "About",
+      path: "/about",
+      Component: AboutPage,
+      getServerSideProps: async (path: string): Promise<any> => {
+        const result = await fetch(`${config.apiDomain}/about`)
+        const data = await result.json()
+        return data
+      },
+    },
+  ]
+}

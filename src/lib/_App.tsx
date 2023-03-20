@@ -16,13 +16,13 @@ const _App = ({ routes, globalInitialProps, Layout = _DefaultLayout }: _AppProps
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {routes.map(({ name, path, getStaticProps, Component }) => (
+        {routes.map(({ name, path, getServerSideProps, Component }) => (
           <Route
             key={path}
             path={path}
             element={
               <_Page
-                getStaticProps={getStaticProps}
+                getServerSideProps={getServerSideProps}
                 props={globalAppProps?.[name]}
                 updateAppProps={updateAppProps(name)}
                 Component={Component}

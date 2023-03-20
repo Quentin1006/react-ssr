@@ -4,8 +4,9 @@ import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
 import serialize from "serialize-javascript"
 
-import { _App, _Document } from "./lib"
-import routes from "./routes"
+import Document from "./Document"
+import { _App } from "./lib"
+import { useRoutes } from "./routes"
 import { Layout } from "./app/Layout"
 
 declare global {
@@ -17,26 +18,42 @@ declare global {
 const app = express()
 const port = 3000
 
+app.use((req, res, next) => {
+  if (req.url.endsWith(".js")) {
+    // Artificially delay serving JS
+    // to demonstrate streaming HTML.
+    setTimeout(next, 1000)
+  } else {
+    next()
+  }
+})
+
 app.use(express.static("public"))
 
 app.get("*", async (req, res) => {
   res.set({ "Content-Type": "text/html; charset=UTF-8" })
   console.log({ url: req.url })
+
+  const config = {
+    apiDomain: "http://localhost:8088",
+  }
+
+  const routes = useRoutes({ config })
   const activeRoute = routes.find((route) => matchPath(route.path, req.url))
   let initialProps: any = {}
-  if (activeRoute?.getStaticProps) {
+  if (activeRoute?.getServerSideProps) {
     initialProps = {
-      [activeRoute.name]: await activeRoute.getStaticProps(req.url),
+      [activeRoute.name]: await activeRoute.getServerSideProps(req.url),
     }
   }
 
   console.log({ serialized: serialize(initialProps) })
   const html = renderToString(
-    <_Document initialProps={serialize(initialProps)}>
+    <Document initialProps={serialize(initialProps)} config={config}>
       <StaticRouter location={req.url}>
         <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
       </StaticRouter>
-    </_Document>
+    </Document>
   )
 
   console.log({ html })

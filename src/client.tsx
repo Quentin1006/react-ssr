@@ -1,15 +1,13 @@
 import { hydrateRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
-import { Layout } from "./app/Layout"
-import _App from "./lib/_App"
-import routes from "./routes"
+
+import { App } from "./app/App"
 
 const Root = () => {
   return (
     <BrowserRouter>
-      <_App routes={routes} globalInitialProps={globalThis.__INITIAL_DATA__} Layout={Layout} />
+      <App globalInitialProps={globalThis.__INITIAL_DATA__} config={globalThis.__CONFIG__} />
     </BrowserRouter>
   )
 }
-
 hydrateRoot(document.getElementById("root")!, <Root />)

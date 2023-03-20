@@ -9,7 +9,7 @@ type _RouteConfig = {
   name: string
   path: string
   Component: FC<any>
-  getStaticProps: (path: string) => Promise<any>
+  getServerSideProps: (path: string) => Promise<any>
 }
 
 export type _RoutesConfig = _RouteConfig[]
