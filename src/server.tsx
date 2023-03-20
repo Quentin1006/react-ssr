@@ -49,6 +49,7 @@ app.get("*", async (req, res) => {
       bootstrapScriptContent: `
         window.__INITIAL_DATA__ = ${serialize(initialProps)};
         window.__CONFIG__ = ${serialize(config)};
+        window.__REACT_QUERY_STATE__  = ${serialize(config)};
       `,
       onShellReady() {
         res.setHeader("Content-Type", "text/html")
