@@ -23,7 +23,7 @@ const sleep = (time) =>
 app.get("/users/:id", async (req, res) => {
   await sleep(1200)
 
-  res.json({ data: { firstname: "Quentin", lastname: "Sahal" } })
+  res.json({ firstname: "Quentin", lastname: "Sahal" })
 })
 
 app.get("/home", async (req, res) => {
