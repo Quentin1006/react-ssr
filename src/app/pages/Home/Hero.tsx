@@ -17,6 +17,8 @@ const fetchUser = async () => {
 }
 
 export default () => {
+  // FIXME: manque probablement les initial props
+  // pour ne pas refaire l'appel lors de la rehydratation
   const { data, isFetching } = useQuery({
     queryKey: ["users", 1],
     queryFn: () => fetchUser(),
