@@ -5,9 +5,8 @@ import { StaticRouter } from "react-router-dom/server"
 import { matchPath } from "react-router-dom"
 
 import Document from "./document"
-import _App from "./lib/_App"
-import App from "./app/App"
-import routes from "./routes"
+import { App } from "./app/App"
+import { getRoutes } from "./routes"
 import { Layout } from "./app/Layout"
 
 const app = express()
@@ -27,7 +26,10 @@ app.use(express.static("public"))
 
 app.get("*", async (req, res) => {
   console.log({ url: req.url })
-  const activeRoute = routes.find((route) => matchPath(route.path, req.url))
+  const config = {
+    apiDomain: "http://localhost:8088",
+  }
+  const activeRoute = getRoutes({ config }).find((route) => matchPath(route.path, req.url))
   let initialProps: any = {}
   if (activeRoute?.getServerSideProps) {
     initialProps = {
@@ -35,16 +37,20 @@ app.get("*", async (req, res) => {
     }
   }
 
-  console.log({ initialProps })
+  console.log({ initialProps, config })
   const stream = renderToPipeableStream(
     <Document>
       <StaticRouter location={req.url}>
-        <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
+        <App globalInitialProps={initialProps} config={config} />
       </StaticRouter>
     </Document>,
     {
       bootstrapScripts: ["/bundle.js"],
-      bootstrapScriptContent: `window.__INITIAL_DATA__ = ${serialize(initialProps)}`,
+      bootstrapScriptContent: `
+        window.__INITIAL_DATA__ = ${serialize(initialProps)};
+        window.__CONFIG__ = ${serialize(config)};
+        window.__REACT_QUERY_STATE__  = ${serialize(config)};
+      `,
       onShellReady() {
         res.setHeader("Content-Type", "text/html")
         res.statusCode = 200
