@@ -10,15 +10,15 @@ type User = {
 const fetchUser = async () => {
   const result = await fetch("http://localhost:8088/users/1")
   const data = await result.json()
+  console.log("after fetch", { data })
   return { ...data }
 }
 
 export default () => {
-  // FIXME: manque probablement les initial props
-  // pour ne pas refaire l'appel lors de la rehydratation
   const { data, isFetching } = useQuery({
     queryKey: ["users", 1],
     queryFn: () => fetchUser(),
+    suspense: true,
   })
 
   if (isFetching) {

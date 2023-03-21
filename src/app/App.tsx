@@ -18,6 +18,7 @@ export const App = ({ globalInitialProps, config }) => {
       })
   )
 
+  console.log("rendering App")
   const routes = useRoutes({ config })
   return (
     <AppProvider config={config}>

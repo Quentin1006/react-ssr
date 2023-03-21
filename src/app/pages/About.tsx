@@ -6,7 +6,7 @@ type AboutProps = {
 }
 
 export default (props: AboutProps) => {
-  console.log("(re)rendering About", { props })
+  // console.log("(re)rendering About", { props })
   return (
     <>
       <div>This is About</div>
