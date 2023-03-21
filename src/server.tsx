@@ -5,7 +5,7 @@ import { matchPath } from "react-router-dom"
 import serialize from "serialize-javascript"
 
 import Document from "./Document"
-import { _App } from "./lib"
+import { App } from "./app/App"
 import { useRoutes } from "./routes"
 import { Layout } from "./app/Layout"
 
@@ -51,7 +51,7 @@ app.get("*", async (req, res) => {
   const html = renderToString(
     <Document initialProps={serialize(initialProps)} config={config}>
       <StaticRouter location={req.url}>
-        <_App routes={routes} globalInitialProps={initialProps} Layout={Layout} />
+        <App globalInitialProps={initialProps} config={config} />
       </StaticRouter>
     </Document>
   )
